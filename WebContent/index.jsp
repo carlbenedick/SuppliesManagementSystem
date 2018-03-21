@@ -49,7 +49,12 @@
 <td>Active Tag</td>
 <td><input type="radio" name="activeTag" value="yes">Yes
 <input type="radio" name="activeTag" value="no">No</td>
- 
+</tr>
+<tr>
+<td>Access Level</td>
+<td><select id="accessLevel" name="accessLevel"></select>
+<option value=""></option>
+
 </tr>
 </table>
 </div>
