@@ -40,14 +40,14 @@
 				</td>
 				<td rowspan="3">
 					<label>Remarks</label>
-					<input type="text"/>
+					<textarea rows="3" cols="10"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<label>Obsolete Tag</label>
 					<input type="radio" name="obs_tag" value="Yes">Yes
-					<input type="radio" name="obs_tag" value="No">No
+					<input type="radio" name="obs_tag" value="No" checked="checked">No
 				</td>
 			</tr>
 			<tr>
@@ -58,5 +58,7 @@
 			</tr>			
 		</table>
 	</div>
+	
+	
 </body>
 </html>
