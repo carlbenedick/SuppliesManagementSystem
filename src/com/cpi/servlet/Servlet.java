@@ -93,8 +93,8 @@ public class Servlet extends HttpServlet {
 			page = "index.jsp";
 		} else if (action.equals("goHome")) {
 			page = "home.jsp";
-//		} else if (action.equals("goMainte")) {
-//			page = "mainte.jsp";
+		} else if (action.equals("goMainte")) {
+			page = "mainte.jsp";
 		} else if (action.equals("goIssue")) {
 			page = "issue";
 			System.out.println(page);
