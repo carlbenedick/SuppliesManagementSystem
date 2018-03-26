@@ -14,60 +14,8 @@
 </script>
 </head>
 <body>
-	<div id="userTable">
-		<table id="addData">
-			<tr>
-				<th>User ID</th>
-				<th><input type="text" id="user_id"></th>
-				<th></th>
-				<th><input type="button" id="btnadds" value="Add New"></th>
-			</tr>
-			<tr>
-				<th>Password</th>
-				<th><input type="text" id="password" disabled="disabled"></th>
 
-				<th></th>
-
-				<th><input type="button" id="btnSave" value="Save"></th>
-			</tr>
-			<tr>
-				<th>First Name</th>
-				<th><input type="text" id="firstName"></th>
-				<th></th>
-				<th><input type="button" id="btnCancel" value="Cancel"></th>
-			</tr>
-			<tr>
-				<th>Last Name</th>
-				<th><input type="text" id="lastName"></th>
-			</tr>
-			<tr>
-				<th>Middle Initial</th>
-				<th><input type="text" id="middleInitial"></th>
-			</tr>
-			<tr>
-				<th>Email Address</th>
-				<th><input type="text" id="emailAdd"></th>
-			</tr>
-			<tr>
-				<th>Active Tag</th>
-				<th><input type="radio" name="active" id="activeYes" value="Y">Yes
-					<input type="radio" name="active" id="activeNo" value="N">No</th>
-			</tr>
-			<tr>
-				<th>Access Level</th>
-				<th><select id="accessLevel" name="accessLevel">
-						<option value=""></option>
-						<option value="A">Admin</option>
-						<option value="U">User</option>
-				</select></th>
-			</tr>
-			<tr>
-				<th>Search</th>
-				<th><input type="text" id="search"></th>
-			</tr>
-		</table>
-		<div>
-			<table id="tableRow" border="1"
+			<table id="tableRows" border="1"
 				style="width: 1345px; margin: 2px 0px 0px 2px; background: buttonhighlight; align: center;">
 				<tr>
 					<th>User ID</th>
@@ -90,7 +38,7 @@
 						<td><c:out value="${u.firstName}" /></td>
 						<td><c:out value="${u.lastName}" /></td>
 						<td><c:out value="${u.middleInitial}" /></td>
-						<td><c:out value="${u.email}" /></td>
+						<td><c:out value="${u.emails}" /></td>
 						<td><c:out value="${u.activeTag}" /></td>
 						<td><c:out value="${u.accessLevel}" /></td>
 						<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy"
@@ -103,13 +51,11 @@
 					</tr>
 				</c:forEach>
 			</table>
-		</div>
-	</div>
 </body>
 <script>
-	function clicks(row) {
+	/* function clicks(row) { */
 		var Rows = "";
-		var inserts = $("tableRow");
+		var inserts = $("tableRows");
 		var selectedRows = "";
 
 		$("user_id").setValue(row.down("td", 0).innerHTML);
@@ -135,8 +81,8 @@
 				inserts.rows[Rows].removeClassName("hover1");
 			}
 		}
-	}
-	$("btnSave").observe("click", function() {
+	/* } */
+	/* $("btnSave").observe("click", function() {
 		updateProfiles();
 	});
 	function updateProfiles() {
@@ -154,7 +100,7 @@
 				firstName : $F("firstName"),
 				lastName : $F("lastName"),
 				middleInitial : $F("middleInitial"),
-				email : $F("emailAdd"),
+				emails : $F("emailAdd"),
 				activeTag : activeTags,
 				accessLevel : $F("accessLevel")
 			},
@@ -162,8 +108,8 @@
 				$("userTable").update(response.responseText);
 			}
 		});
-	}
-	$("btnadds").observe("click", function() {
+	} */
+	/* $("btnadds").observe("click", function() {
 		addNewUser();
 	});
 	function addNewUser() {
@@ -176,7 +122,7 @@
 				$("userTable").update(response.responseText);
 			}
 		});
-	}
+	} */
 	$$("table#tableRow tr").each(function(row) {
 		row.observe("mouseover", function() {
 			row.addClassName("hover");
@@ -187,47 +133,6 @@
 
 		row.observe("click", function() {
 			clicks(row);
-		});
-	});
-
-	/* $("search").observe("blur", function() {
-			new Ajax.Request(contextPath + "/search", {
-				method : "GET",
-				parameters : {
-					action : "searches",
-					searchId : $F("search")
-				},
-				onComplete : function(response) {
-					//$("userTable").update(response.responseText);
-				}
-			});
-		
-	}); */
-	
-
-	
-	
-	$("search").observe("change", function(){
-		new Ajax.Request(contextPath + "/search", {
-			method: "get",
-			parameters: {
-				action: "test",
-				searchId: $("search").value
-			},
-			onComplete: function(response) {
-			}
-		});
-	});
-
-	$("btnCancel").observe("click", function() {
-		new Ajax.Request(contextPath + "/cancel", {
-			method : "GET",
-			parameters : {
-				action : "cancelUser"
-			},
-			onComplete : function(response) {
-				$("userTable").update(response.responseText);
-			}
 		});
 	});
 </script>

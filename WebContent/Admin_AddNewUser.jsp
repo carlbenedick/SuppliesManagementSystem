@@ -44,8 +44,8 @@
 			</tr>
 			<tr>
 				<td>Active Tag</td>
-				<td><input type="radio" id="activetag" value="Y">Yes <input
-					type="radio" id="activetag" value="N">No</td>
+				<td><input type="radio" name="actives" id="activetagYes">Yes
+					<input type="radio" name="actives" id="activetagNo">No</td>
 			</tr>
 			<tr>
 				<td>Access Level</td>
@@ -60,9 +60,19 @@
 </body>
 <script>
 	$("btnsaves").observe("click", function() {
-		addUsers();
+		if($F("userid") != $F("pass")){
+			alert("ID must be the same with Password");
+		}else{
+			addUsers();
+		}
 	});
 	function addUsers() {
+		var activeTags = "";
+		if ($("activetagYes").checked) {
+			activeTags = "Y";
+		} else if ($("activetagNo").checked) {
+			activeTags = "N";
+		}
 		new Ajax.Request(contextPath + "/adds", {
 			method : "GET",
 			parameters : {
@@ -73,13 +83,24 @@
 				lastname : $F("lastname"),
 				middleinitial : $F("middleinitial"),
 				emailadd : $F("emailadd"),
-				activet : $F("activetag"),
+				activetag : activeTags,
 				accesslevel : $F("accesslevel")
 			},
 			onComplete : function(response) {
-				/* $("addsUser").update(response.responseText); */
+				$("addsUser").update(response.responseText);
 			}
 		});
 	}
+	$("btncancel").observe("click", function() {
+		new Ajax.Request(contextPath + "/cancel", {
+			method : "GET",
+			parameters : {
+				action : "cancelAdd"
+			},
+			onComplete : function(response) {
+				$("addsUser").update(response.responseText);
+			}
+		});
+	});
 </script>
 </html>
