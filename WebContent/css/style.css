@@ -1,0 +1,37 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	text-align: center;
+}
+
+.button {
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+	border-radius: 4px;
+}
+
+.button:hover {
+	background-color: #4CAF50;
+	color: white;
+}
+
+#btnLogin:hover {
+	background-color: blue;
+	color: white;
+}
+
+.hover {
+	background-color: #80ffff;
+}
+
+.hover1 {
+	background-color: #80ffff;
+}
+
+.tableRow {
+	height: 1px;
+	border-bottom: 1px solid #E0E0E0;
+	padding: 30px;
+	padding-top: 7px;
+	padding-left: 0px;
+}

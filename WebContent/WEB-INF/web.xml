@@ -1,12 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>SuppliesManagementSystem</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>SessionExerciseDologuin</display-name>
+	
+	<servlet>
+		<servlet-name>homeServlet</servlet-name>
+		<servlet-class>com.cpi.servlet.Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>homeServlet</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>suppliesMaintenance</servlet-name>
+		<servlet-class>com.cpi.servlet.SuppliesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>suppliesMaintenance</servlet-name>
+		<url-pattern>/supplies</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>userServlets</servlet-name>
+		<servlet-class>com.cpi.servlet.UserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>userServlets</servlet-name>
+		<url-pattern>/maintenance</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>userServlets</servlet-name>
+		<url-pattern>/updateProfile</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>userServlets</servlet-name>
+		<url-pattern>/addNew</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>userServlets</servlet-name>
+		<url-pattern>/adds</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>issuance</servlet-name>
+		<servlet-class>com.cpi.servlet.LoadIssue</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>issuance</servlet-name>
+		<url-pattern>/issue</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>add</servlet-name>
+		<servlet-class>com.cpi.servlet.AddIssue</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>add</servlet-name>
+		<url-pattern>/addIssue</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>update</servlet-name>
+		<servlet-class>com.cpi.servlet.UpdateIssue</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>update</servlet-name>
+		<url-pattern>/updateIssue</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoadAddIssue</servlet-name>
+		<servlet-class>com.cpi.servlet.LoadAddIssue</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoadAddIssue</servlet-name>
+		<url-pattern>/loadAddIssue</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

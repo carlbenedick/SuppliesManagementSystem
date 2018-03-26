@@ -2,7 +2,7 @@ package com.cpi.entity;
 
 
 public class Supply {
-	private int supplyID, supplyTypeID, reorderLvl, actCount;
+	private Integer supplyID, supplyTypeID, reorderLvl, actCount;
 	private String itemName, itemUnit, location, remarks, lastUser, typeName, dateAdded, lastUpdate;
 	private String obsTag;
 	//private String dateAdded, lastUpdate;
@@ -11,13 +11,26 @@ public class Supply {
 
 	}
 	
-	public Supply(int supplyTypeID, String typeName) {
+	public Supply(Integer supplyTypeID, String typeName) {
 		this.supplyTypeID = supplyTypeID;
 		this.typeName = typeName;
 	}
 	
-	public Supply(int supplyID, int supplyTypeID,String typeName, String itemName, String itemUnit, String obsTag, String location,
-			int reorderLvl, int actCount, String remarks, String dateAdded, String lastUser, String lastUpdate) {
+	public Supply(Integer supplyID, String itemName, String itemUnit, String obsTag, String location,
+			Integer reorderLvl, String remarks, String lastUser) {
+		this.supplyID = supplyID;
+		this.itemName = itemName;
+		this.itemUnit = itemUnit;
+		this.obsTag = obsTag;
+		this.location = location;
+		this.reorderLvl = reorderLvl;
+		this.remarks = remarks;
+		this.lastUser = lastUser;
+
+	}
+	
+	public Supply(Integer supplyID, Integer supplyTypeID,String typeName, String itemName, String itemUnit, String obsTag, String location,
+			Integer reorderLvl, Integer actCount, String remarks, String dateAdded, String lastUser, String lastUpdate) {
 		this.supplyID = supplyID;
 		this.supplyTypeID = supplyTypeID;
 		this.typeName = typeName;
@@ -34,8 +47,8 @@ public class Supply {
 
 	}
 	
-	public Supply(int supplyTypeID, String itemName, String itemUnit, String obsTag, String location,
-			int reorderLvl, int actCount, String remarks, String dateAdded, String lastUser) {
+	public Supply(Integer supplyTypeID, String itemName, String itemUnit, String obsTag, String location,
+			Integer reorderLvl, Integer actCount, String remarks, String dateAdded, String lastUser) {
 		this.supplyTypeID = supplyTypeID;
 		this.itemName = itemName;
 		this.itemUnit = itemUnit;
@@ -49,8 +62,8 @@ public class Supply {
 
 	}	
 
-	public Supply(int supplyID, int supplyTypeID, String itemName, String itemUnit, String obsTag, String location,
-			int reorderLvl, int actCount, String remarks, String dateAdded, String lastUser, String lastUpdate) {
+	public Supply(Integer supplyID, Integer supplyTypeID, String itemName, String itemUnit, String obsTag, String location,
+			Integer reorderLvl, Integer actCount, String remarks, String dateAdded, String lastUser, String lastUpdate) {
 		this.supplyID = supplyID;
 		this.supplyTypeID = supplyTypeID;
 		this.itemName = itemName;
@@ -66,19 +79,19 @@ public class Supply {
 
 	}
 
-	public int getSupplyID() {
+	public Integer getSupplyID() {
 		return supplyID;
 	}
 
-	public int getSupplyTypeID() {
+	public Integer getSupplyTypeID() {
 		return supplyTypeID;
 	}
 
-	public int getReorderLvl() {
+	public Integer getReorderLvl() {
 		return reorderLvl;
 	}
 
-	public int getActCount() {
+	public Integer getActCount() {
 		return actCount;
 	}
 
@@ -114,19 +127,19 @@ public class Supply {
 		return lastUpdate;
 	}
 
-	public void setSupplyID(int supplyID) {
+	public void setSupplyID(Integer supplyID) {
 		this.supplyID = supplyID;
 	}
 
-	public void setSupplyTypeID(int supplyTypeID) {
+	public void setSupplyTypeID(Integer supplyTypeID) {
 		this.supplyTypeID = supplyTypeID;
 	}
 
-	public void setReorderLvl(int reorderLvl) {
+	public void setReorderLvl(Integer reorderLvl) {
 		this.reorderLvl = reorderLvl;
 	}
 
-	public void setActCount(int actCount) {
+	public void setActCount(Integer actCount) {
 		this.actCount = actCount;
 	}
 
