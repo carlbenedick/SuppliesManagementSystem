@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="Supply">
+
+	<typeAlias alias="SupplyClass" type="com.cpi.entity.Supply" />
+
+	<resultMap id="getSupplyMap" class="SupplyClass">
+		<result column="supply_id" property="supplyID" />
+		<result column="supply_type_id" property="supplyTypeID" />
+		<result column="type_name" property="typeName" />
+		<result column="item_name" property="itemName" />
+		<result column="item_unit" property="itemUnit" />
+		<result column="obsolete_tag" property="obsTag" />
+		<result column="location" property="location" />
+		<result column="reorder_level" property="reorderLvl" />
+		<result column="actual_count" property="actCount" />
+		<result column="remarks" property="remarks" />
+		<result column="date_added" property="dateAdded" />
+		<result column="last_user" property="lastUser" />
+		<result column="last_update" property="lastUpdate" />
+	</resultMap>
+
+	<resultMap id="getSupplyTypesMap" class="SupplyClass">
+		<result column="supply_type_id" property="supplyTypeID" />
+		<result column="type_name" property="typeName" />
+	</resultMap>
+	
+	<select id="getSupply" resultMap="getSupplyMap">
+		SELECT a.supply_id,
+		a.supply_type_id, b.type_name, a.item_name, a.item_unit,
+		a.obsolete_tag, a.location,
+		a.reorder_level, a.actual_count, a.remarks,
+		TO_CHAR(a.date_added,'MM/DD/RRRR') AS date_added, a.last_user,
+		TO_CHAR(a.last_update,'MM/DD/RRRR') AS last_update
+		FROM supplies_3 a,
+		supply_types_3 b
+		WHERE a.supply_type_id = b.supply_type_id
+		AND obsolete_tag = 'N'
+		AND reorder_level is not null
+		ORDER BY a.supply_id
+	</select>
+
+	<select id="getSupplyTypes" resultMap="getSupplyTypesMap">
+		SELECT supply_type_id,
+		type_name
+		FROM supply_types_3
+		ORDER BY supply_type_id
+	</select>
+	
+	<select id="getSearchSupply" resultMap="getSupplyMap" parameterClass="java.util.Map">
+		SELECT a.supply_id,
+		a.supply_type_id, b.type_name, a.item_name, a.item_unit,
+		a.obsolete_tag, a.location,
+		a.reorder_level, a.actual_count, a.remarks,
+		TO_CHAR(a.date_added,'MM/DD/RRRR') AS date_added, a.last_user,
+		TO_CHAR(a.last_update,'MM/DD/RRRR') AS last_update
+		FROM supplies_3 a,
+		supply_types_3 b
+		WHERE a.supply_type_id = b.supply_type_id
+		AND obsolete_tag = 'N'
+		AND a.supply_id LIKE #supplyID#
+		ORDER BY a.supply_id
+	</select>
+
+	<insert id="insertSupply" parameterClass="SupplyClass">
+		INSERT into
+		supplies_3
+		(supply_id,
+		supply_type_id, item_name, item_unit, obsolete_tag,
+		location,
+		reorder_level, actual_count, remarks, date_added, last_user,
+		last_update)
+		VALUES(seq_supply_id_3.NEXTVAL, #supplyTypeID#, #itemName#, #itemUnit#,
+		#obsTag#,#location#,
+		#reorderLvl#,#actCount#,#remarks#,to_date(#dateAdded#,'MM/DD/YYYY'),#lastUser#,SYSDATE)
+	</insert>
+	
+	<insert id="updateSupply" parameterClass="SupplyClass"> 
+	     UPDATE supplies_3
+	     SET item_name = #itemName#, 
+		 	 item_unit = #itemUnit#,
+		 	 obsolete_tag = #obsTag#, 
+		 	 location = #location#,
+		 	 reorder_level = #reorderLvl#,
+		 	 remarks = #remarks#
+		 	 last_user = #lastUser#
+		 	 last_update = sysdate
+		 WHERE supply_id = #supplyID#
+	</insert>
+</sqlMap>

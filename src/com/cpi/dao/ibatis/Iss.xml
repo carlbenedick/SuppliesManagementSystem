@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="Iss">
+
+	<typeAlias alias="IssueClass" type="com.cpi.entity.Issue"/>
+	
+	<resultMap id="getIssueMap" class="IssueClass">
+		<result column="issue_id" 		property="issueId"/>
+		<result column="supply_id" 		property="supplyId"/>
+		<result column="quantity" 		property="quantity"/>
+		<result column="requestor" 		property="requestor"/>
+		<result column="dept_id" 		property="deptId"/>
+		<result column="issue_date" 	property="date"/>
+		<result column="last_user" 		property="lastUser"/>
+		<result column="last_update" 	property="lastUpdate"/>
+	</resultMap>
+	
+	<select id="getList" resultMap="getIssueMap">
+		SELECT issue_id, supply_id, quantity, requestor, dept_id, issue_date, last_user, last_update
+		FROM issued_supplies_3
+		ORDER BY issue_id
+	</select>
+	
+	<select id="getIssue" resultMap="getIssueMap">
+		SELECT issue_id, supply_id, quantity, requestor, dept_id, issue_date, last_user, last_update
+		FROM issued_supplies_3 
+		WHERE issue_id = #issueId#
+	</select>
+	
+	<select id="searchIssue" resultMap="getIssueMap">
+		SELECT issue_id, supply_id, quantity, requestor, dept_id, issue_date, last_user, last_update
+		FROM issued_supplies_3 
+		WHERE issue_id LIKE #requestor#
+	</select>
+	
+	<insert id="insertIssue" parameterClass="IssueClass">
+		INSERT into issued_supplies_3 (issue_id, supply_id, quantity, requestor, dept_id, issue_date, last_user, last_update)
+		VALUES(issue_id_seq.NEXTVAL, #supplyId#, #quantity#, #requestor#, #deptId#, #date#, #lastUser#, #lastUpdate#)
+	</insert>
+	
+	<insert id="updateIssue" parameterClass="IssueClass">
+		UPDATE issued_supplies_3 
+		SET	supply_id = #supplyId#, 
+		 	quantity = #quantity#, 
+		 	requestor = #requestor#, 
+		 	dept_id = #deptId#, 
+		 	issue_date = #date#, 
+		 	last_user = #lastUser#, 
+		 	last_update = #lastUpdate#
+		WHERE  issue_id = #issueId#
+	</insert>
+	
+</sqlMap>

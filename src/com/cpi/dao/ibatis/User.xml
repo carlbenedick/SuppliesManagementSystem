@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="User">
+
+	<typeAlias alias="UserClass" type="com.cpi.entity.User" />
+
+	<resultMap id="getUserLoginMap" class="UserClass">
+		<result column="user_id" property="userId" />
+		<result column="password" property="password" />
+		<result column="active_tag" property="activeTag" />
+		<result column="access_level" property="accessLevel" />
+		<!-- result column="manager_id" property="manager"/> -->
+	</resultMap>
+
+	<select id="getUserLogin" resultMap="getUserLoginMap">
+		SELECT user_id, password,
+		active_tag, access_level
+		FROM sms_users_3
+	</select>
+	
+	<insert id="deactivateUser" parameterClass="UserClass">
+		UPDATE
+		sms_users_3
+		SET
+		active_tag = #activeTag#,
+		last_update = #lastUpdate#
+		WHERE
+		user_id =
+		#userId#
+	</insert>
+
+	<insert id="loginUser" parameterClass="UserClass">
+		UPDATE
+		sms_users_3
+		SET
+		last_login = #lastLogin#
+		WHERE
+		user_id =
+		#userId#
+	</insert>
+
+</sqlMap>

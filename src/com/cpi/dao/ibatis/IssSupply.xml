@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sqlmap-2.dtd">
+<sqlMap namespace="Supply">
+
+	<typeAlias alias="SupplyClass" type="com.cpi.entity.Supply"/>
+	
+	<resultMap id="getIssSupplyMap" class="SupplyClass">
+		<result column="item_name" 		property="itemName"/>
+		<result column="supply_id" 		property="supplyID"/>
+		<result column="obsolete_tag" 		property="obsTag"/>
+		<result column="actual_count" 		property="actCount"/>
+		<result column="reorder_level" 		property="reorderLvl"/>
+	</resultMap>
+	
+	<select id="getIssSupply" resultMap="getIssSupplyMap">
+		SELECT item_name, supply_id, obsolete_tag, actual_count, reorder_level
+		FROM supplies_3
+		WHERE obsolete_tag = 'N'
+	</select>
+	
+	<select id="getSupplyByID" resultMap="getIssSupplyMap">
+		SELECT item_name, supply_id, obsolete_tag, actual_count, reorder_level
+		FROM supplies_3
+		WHERE supply_id = #supplyID#
+	</select>
+	
+	<insert id="updateSupplyCount" parameterClass="SupplyClass">
+		UPDATE supplies_3
+		SET	actual_count = #actCount#
+		WHERE  supply_id = #supplyID#
+	</insert>
+
+	
+</sqlMap>
