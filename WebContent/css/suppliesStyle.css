@@ -1,0 +1,80 @@
+@charset "ISO-8859-1";
+
+	.tdFormFields{
+		width: 50%;
+		padding-left: 70px;		
+	}
+	
+	.thTabSupplies{
+		font-size: 12px;
+		font-weight: normal;
+		border: 1px solid;
+	}
+	
+	#tabSupplies{
+		border: 1px solid;
+		border-spacing: none;
+		border-collapse: collapse; 
+		width: 100%;
+	}
+	
+	.hover{
+		background-color: #adc7d3;
+	}
+	
+	.rowClick{
+		background-color: #5390ad;
+	}
+	
+	.formFields{
+		border-radius: 5px;
+		width: 320px;
+		display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        line-height: 30px;
+        outline: none;
+        box-shadow: 0px 0px 14px #4195fc; 
+	}
+	
+ 	.formFields2{
+		border-radius: 5px;
+ 		width: 47px; 
+ 		display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        line-height: 30px;
+        outline: none;
+        box-shadow: 0px 0px 14px #4195fc;
+	} 	
+	
+	.textFieldsLabel{
+		color: #527a7a;
+		font-weight: bold;
+		font-size: 16px;
+	}
+	
+	input[type="button"]{
+		width: 250px;
+		line-height: 30px;
+		border-radius: 5px;
+		font-weight: bold;
+		color: #d9d9d9;
+		background-color: #00264d;
+		border-color: #00264d;
+	}
+	
+	.leftFieldsAlign{
+		text-align: right;
+	}
+	
+	.requiredField{
+		border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        line-height: 30px;
+        outline: none;
+        box-shadow: 0px 0px 5px #ff6666;
+	}

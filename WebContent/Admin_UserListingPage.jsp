@@ -90,7 +90,7 @@
 						<td><c:out value="${u.firstName}" /></td>
 						<td><c:out value="${u.lastName}" /></td>
 						<td><c:out value="${u.middleInitial}" /></td>
-						<td><c:out value="${u.emails}" /></td>
+						<td><c:out value="${u.email}" /></td>
 						<td><c:out value="${u.activeTag}" /></td>
 						<td><c:out value="${u.accessLevel}" /></td>
 						<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy"
@@ -154,7 +154,7 @@
 				firstName : $F("firstName"),
 				lastName : $F("lastName"),
 				middleInitial : $F("middleInitial"),
-				emails : $F("emailAdd"),
+				email : $F("emailAdd"),
 				activeTag : activeTags,
 				accessLevel : $F("accessLevel")
 			},
