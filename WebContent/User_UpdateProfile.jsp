@@ -11,7 +11,7 @@
 </script>
 </head>
 <body>
-	<div>
+	<div id="updateProf">
 		<table>
 			<tr>
 				<td>User ID</td>
@@ -61,9 +61,31 @@
 				emailss : $F("emailAdds")
 			},
 			onComplete : function(response) {
-				/* $("mainContents").update(response.responseText); */
+				$("updateProf").update(response.responseText);
 			}
 		});
 	}
+	$("btnChangePassword").observe("click", function() {
+		new Ajax.Request(contextPath + "/changepass", {
+			method : "GET",
+			parameters : {
+				action : "changepass"
+			},
+			onComplete : function(response) {
+				$("updateProf").update(response.responseText);
+			}
+		});
+	});
+	$("btnCan").observe("click", function() {
+		new Ajax.Request(contextPath + "/cancel", {
+			method : "GET",
+			parameters : {
+				action : "cancelProfile"
+			},
+			onComplete : function(response) {
+				$("updateProf").update(response.responseText);
+			}
+		});
+	});
 </script>
 </html>
