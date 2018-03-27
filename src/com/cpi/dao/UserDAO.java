@@ -24,4 +24,6 @@ public interface UserDAO {
 	public void updateUser(Map<String, Object> params) throws SQLException;
 
 	public void updateProfile(Map<String, Object> params) throws SQLException;
+	
+	public List<User> searchUser(HttpServletRequest request) throws SQLException;
 }

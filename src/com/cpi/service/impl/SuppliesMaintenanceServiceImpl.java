@@ -44,4 +44,10 @@ public class SuppliesMaintenanceServiceImpl implements SuppliesMaintenanceServic
 		
 	}
 
+	@Override
+	public Integer getResultFunctionHasChild(HttpServletRequest request) throws SQLException {
+		// TODO Auto-generated method stub
+		return this.supplyDAO.getResultFunctionHasChild(request);
+	}
+
 }

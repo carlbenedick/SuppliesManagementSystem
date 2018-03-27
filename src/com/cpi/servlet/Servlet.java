@@ -27,7 +27,8 @@ public class Servlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-
+		int loginStatus = 1;
+		String loginMessage = null;
 		try {
 			@SuppressWarnings("resource")
 			ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
@@ -56,25 +57,28 @@ public class Servlet extends HttpServlet {
 			String action = request.getParameter("action");
 
 			if (action.equals("login")) {
-				if (userService.login(request)) {
+				if (userService.login(request)) {					
 					userService.loginUser(request);
 					page = "index.jsp";
-					session.setAttribute("curPage", page);
-					request.setAttribute("curpage", page);
 				} else {
 					System.out.println((Integer) session.getAttribute("tryCount"));
 					if ((Integer) session.getAttribute("tryCount") >= 3) {
 						userService.deactivateUser(request);
 						session.invalidate();
 					}
+					loginStatus = 0;
 					page = "index.jsp";
 				}
 			} else if (action.equals("goHome")) {
 				page = "index.jsp";
 			}
-			// response.sendRedirect("home.jsp");
-			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-			dispatcher.forward(request, response);
+			
+			loginMessage = (String) request.getAttribute("message");
+			
+			response.getWriter().write("{'loginStatus': "+ loginStatus +", 'loginMessage': '" + loginMessage +"'}");
+			
+//			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+//			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -97,6 +101,7 @@ public class Servlet extends HttpServlet {
 			page = "mainte.jsp";
 		} else if (action.equals("goIssue")) {
 			page = "issue";
+			System.out.println(page);
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);

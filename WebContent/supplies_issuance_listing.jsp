@@ -31,11 +31,11 @@
 <title>Issued Supply Listings</title>
 </head>
 <body>
-	<div id="body" class="container panel-body">
-		<h3>Issue Supplies</h3>
-
-		<div id="form">
-			<form>
+	<div id="body" class="container-fluid panel-body">
+		<fieldset style="margin-top:30px;">
+		<legend>Issue Supplies</legend>
+		<div id="form" >
+			<form class="form-inline" style="margin-left: 280px;">
 				<div class="form-group edit-form">
 					<label for="itemName">Item Name: </label> <select
 						class="form-control" name="itemName" id="itemName" required>
@@ -48,18 +48,19 @@
 					</select>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" style="margin-left: 100px;">
 					<label for="quantity">Quantity: </label> <input type="text"
 						class="form-control" name="quantity" id="quantity" required />
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" style="margin-left: 20px;">
 					<label for="requestor">Requested By: </label> <input type="text"
 						class="form-control" name="requestor" id="requestor" required />
 				</div>
-
+				</form>
+				<form class="form-inline" style="margin-top: 20px; margin-left: 230px;">
 				<div class="form-group edit-form">
-					<label for="departmentName">Item Name: </label> <select
+					<label for="departmentName">Department Name: </label> <select
 						class="form-control" name="departmentName" id="departmentName"
 						required>
 						<!-- Loop for item name -->
@@ -71,23 +72,26 @@
 					</select>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" style="margin-left: 20px;">
 					<label for="issueDate">Issue Date: </label> <input type="date"
 						class="form-control" name="issueDate" id="issueDate" required />
 				</div>
-
-				<div class="form-group">
+				</form>
+				
+				<form class="form-inline" style="margin-top: 20px;">
+				<div class="form-group" style="margin-left: 500px;">
 					<!-- Session userID attribute value -->
 					<input type="hidden" name="userId" value="userId" id="userId"
 						required> <input type="hidden" value="" id="issueId"
 						name="issueId">
 					<button type="button" id="btnAdd" class="btn btn-success"
-						onclick="location.href='loadAddIssue'">Issue Request</button>
-					<button type="button" id="btnEdit" class="btn btn-primary">Save</button>
-					<button type="button" id="btnCancel" class="btn btn-primary">Cancel</button>
+						onclick="location.href='loadAddIssue'" style="margin-left: 10px;">Issue Request</button>
+					<button type="button" id="btnEdit" class="btn btn-primary" style="margin-left: 10px;">Save</button>
+					<button type="button" id="btnCancel" class="btn btn-info" style="margin-left: 10px;">Cancel</button>
 				</div>
 			</form>
 		</div>
+		</fieldset>
 
 		<div id="searchTable">
 			<div class="form-horizontal form-group">
@@ -133,7 +137,9 @@
 		<span id="msg"></span>
 	</div>
 </body>
-
+<jsp:include page="includes/footer.jsp">
+	<jsp:param value="" name="" />
+</jsp:include>
 <script type="text/javascript">
 		function editIssuance() {
 			if($F("quantity") == ""  || $F("requestor") == "" || $F("issueDate") == ""){
@@ -217,7 +223,5 @@
 
 	</script>
 
-<jsp:include page="includes/footer.jsp">
-	<jsp:param value="" name="" />
-</jsp:include>
+
 </html>

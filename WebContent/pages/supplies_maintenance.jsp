@@ -1,99 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Supplies Maintenance</title>
-<script src="js/prototype.js"></script>
+<link rel="stylesheet" type="text/css" href="css/suppliesStyle.css">
+<script type="text/javascript" src="js/prototype.js" ></script>
 <script src="js/suppliesFunctions.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script src="js/functions.js"></script>
 <script>
 	var contextPath = "${pageContext.request.contextPath}";
 </script>
-<style>
-.tdFormFields {
-	width: 50%;
-}
-
-.thTabSupplies {
-	font-size: 12px;
-	font-weight: normal;
-	border: 1px solid;
-}
-
-#tabSupplies {
-	border: 1px solid;
-	border-spacing: none;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.hover {
-	background-color: #adc7d3;
-}
-
-.rowClick {
-	background-color: #5390ad;
-}
-</style>
+<%@ include file="../includes/header.jsp"%>
 </head>
 <body>
 	<div id="mainContents" style="padding-top: 20px;">
-		<div id="header" style="background-color: #448cff;">
-			<%@ include file="../header.jsp"%></div>
-		<table id="tabForm"
-			style="width: 900; border: 1px solid #ffe6e6; padding: 15px; background-color: #b3d7ff"
-			align="center">
+	<div id="body" class="container-fluid panel-body">
+		<table id="tabForm" style="width: 1200px; border: 1px solid #ffe6e6; padding: 15px; background-color: #b3d7ff; border-radius: 25px;" align="center">
 			<tr>
-				<td class="tdFormFields"><label>Supply Type</label> <select
-					id="supplyTypes">
+				<td class="tdFormFields">
+					<label class="textFieldsLabel">Supply Type</label><br/>
+					<select id="supplyTypes" class="formFields" style="height: 35px;" disabled> 
 						<c:forEach var="sup" items="${suppTypes}">
 							<option value="${sup.typeName}" id="optSupplyType">${sup.typeName}</option>
-						</c:forEach>
-				</select></td>
-				<td class="tdFormFields"><label>Entered Date</label> <input
-					type="text" id="txtEnteredDt" /></td>
-			</tr>
-			<tr>
-				<td class="tdFormFields"><label>Item Name</label> <input
-					type="text" id="txtItemName" /></td>
-				<td class="tdFormFields"><label>Reordered Level</label> <input
-					type="text" id="txtReorderLvl" /> <label>Actual Count</label> <input
-					type="text" id="txtActualCount" /></td>
-			</tr>
-			<tr>
-				<td class="tdFormFields"><label>Item Unit</label> <input
-					type="text" id="txtItemUnit" /></td>
-				<td rowspan="3" class="tdFormFields"><label>Remarks</label> <textarea
-						rows="3" cols="50" id="txtRemarks"></textarea></td>
-			</tr>
-			<tr>
-				<td class="tdFormFields"><label>Obsolete Tag</label> <input
-					type="radio" name="obs_tag" value="Y" id="radioYes">Yes <input
-					type="radio" name="obs_tag" value="N" id="radioNo"
-					checked="checked">No</td>
-			</tr>
-			<tr>
-				<td class="tdFormFields"><label>Location</label> <input
-					type="text" id="txtLocation" /></td>
-			</tr>
-			<tr>
-				<td width="100%" align="center" colspan="2"
-					style="padding-top: 20px;"><input type="button" id="btAdd"
-					value="Add New" /> <input type="button" id="btSave" value="Save" />
-					<input type="button" id="btCancel" value="Cancel" /></td>
-			</tr>
-			<tr>
-				<td width="100%" align="center" colspan="2"
-					style="padding-top: 20px;"><label>Search</label> <input
-					type="text" id="txtSearchId" /> <!-- <input type="button" id="btSearch" value="Search"/> -->
+						</c:forEach> 
+					</select>
+				</td>
+				<td class="tdFormFields">
+					<label class="textFieldsLabel">Entered Date</label><br/>
+					<input type="date" id="txtEnteredDt" class="formFields" min="2000-01-01" disabled/>
 				</td>
 			</tr>
 			<tr>
-				<td width="100%" align="center" colspan="2"
-					style="padding-top: 20px;">
-					<table id="tabSupplies" style="width: 2000">
+				<td class="tdFormFields">
+					<label class="textFieldsLabel">Item Name<span style="color:#cc0000; font-weight: bold;">*</span></label><br/>
+					<input type="text" id="txtItemName" class="formFields" maxlength="100"/>
+				</td>
+				<td class="tdFormFields">
+					<label class="textFieldsLabel">Reordered Level</label>
+					<input type="text" id="txtReorderLvl" class="formFields2"/>
+					<label class="textFieldsLabel">Actual Count</label>
+					<input type="text" id="txtActualCount" class="formFields2" disabled/>
+				</td> 
+			</tr>
+			<tr>
+				<td class="tdFormFields">
+					<label class="textFieldsLabel">Item Unit<span style="color:#cc0000; font-weight: bold;">*</span></label><br/>
+					<input type="text" id="txtItemUnit" class="formFields" maxlength="10"/>
+				</td>
+				<td rowspan="3" class="tdFormFields">
+					<label class="textFieldsLabel">Remarks</label><br/>
+					<textarea rows="3" cols="50" id="txtRemarks" class="formFields"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td class="tdFormFields">
+					<label class="textFieldsLabel">Obsolete Tag</label>
+					<input type="radio" name="obs_tag" value="Y" id="radioYes" class="textFieldsLabel">Yes
+					<input type="radio" name="obs_tag" value="N" id="radioNo" checked="checked" class="textFieldsLabel">No
+				</td>
+			</tr>
+			<tr>
+				<td class="tdFormFields">
+					<label class="textFieldsLabel">Location</label><br/>
+					<input type="text" id="txtLocation" class="formFields" maxlength="100"/>
+				</td>
+			</tr>	
+			<tr>
+				<td width="100%" align="center" colspan="2" style="padding-top: 20px;">
+					<input type="button" id="btAdd" value="Add New"/>
+					<input type="button" id="btSave" value="Save"/>
+					<input type="button" id="btCancel" value="Cancel"/>
+	    		</td>
+			</tr>
+			<tr>
+				<td width="100%" align="center" colspan="2" style="padding-top: 20px;"> 
+					<label class="textFieldsLabel">Search</label>
+					<input type="text" id="txtSearchId" class="formFields" placeholder="Enter supply ID..."/>
+					<!-- <input type="button" id="btSearch" value="Search"/> -->
+				</td>
+			</tr>	
+			<tr>
+				<td width="100%" align="center" colspan="2" style="padding-top: 20px;"> 
+				<div id="suppliesTab">
+					<table id="tabSupplies" style="width: 1200px;">
 						<tr class="rowSup">
 							<th class="thTabSupplies" class="colSupId">Supply ID</th>
 							<th class="thTabSupplies" class="colSupTyp">Supply Type</th>
@@ -105,13 +98,12 @@
 							<th class="thTabSupplies" class="colActCnt">Actual Count</th>
 							<th class="thTabSupplies" class="colRmks">Remarks</th>
 							<th class="thTabSupplies" class="colEntDate">Entry Date</th>
-							<th class="thTabSupplies" class="colLastUpBy">Last Updated
-								By</th>
+							<th class="thTabSupplies" class="colLastUpBy">Last Updated By</th>
 							<th class="thTabSupplies" class="colLastUpDt">Last Update</th>
 						</tr>
 						<c:forEach var="supp" items="${supplies}">
 							<tr>
-								<td class="colSupId">${supp.supplyID}</td>
+								<td class="colSupId" >${supp.supplyID}</td>
 								<td class="colSupTyp">${supp.typeName}</td>
 								<td class="colItemNm">${supp.itemName}</td>
 								<td class="colItemName">${supp.itemUnit}</td>
@@ -126,48 +118,86 @@
 							</tr>
 						</c:forEach>
 					</table>
+					</div>
 				</td>
 			</tr>
 		</table>
-	</div>
+	</div></div>
 </body>
 </html>
 <script>
-	$("btAdd").observe("click", function() {
+
+	var rowSelected = "";
+	$("btAdd").observe("click",function(){
 		goToAddNewSupply();
 	});
-
-	$("btSave").observe("click", function() {
-		updateSupply();
-	});
+	
+	$("btSave").observe("click",function(){
+				
+	 if (rowSelected == "") {
+		swal({icon: "error",
+			text:"No row has been selected!"});
+		} else {
+			if (validateReqFields()) {
+				updateSupply();
+				goToSuppliesMain();
+			} else {
+				swal({icon: "error",
+					text:"Please fill out all the required fields!"});
+			}
+		}
+	}); 
 
 	$$("table#tabSupplies tr").each(function(row) {
 
-		row.observe("mouseover", function() {
-			row.addClassName("hover");
-		});
+		if (row.rowIndex > 0) {
+			row.observe("mouseover", function() {
+				row.addClassName("hover");
+			});
 
-		row.observe("mouseout", function() {
-			row.removeClassName("hover");
-		});
+			row.observe("mouseout", function() {
+				row.removeClassName("hover");
+			});
 
-		row.observe("click", function() {
+			row.observe("click", function() {
+				rowSelected = row;
+				whenSelectedRow(row);
 
-			whenSelectedRow(row);
-
-		});
+			});
+		}
 
 	})
 
-	$("txtSearchId").observe("blur", function() {
+	$("txtSearchId").observe("keyup", function(event) {
+		var searchTxt = $F("txtSearchId").replace(" ", "");
+		// Cancel the default action, if needed
+		event.preventDefault();
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			if (!searchTxt == null | !searchTxt == "") {
 
-		if ($F("txtSearchId") == null | $F("txtSearchId") == "") {
-			alert("search");
-			goToSuppliesMain();
-
-		} else {
-			alert("hey " + $F("txtSearchId"));
-			searchSupplyId();
+				if (!isNaN(searchTxt)) {
+					searchSupplyId();
+				}
+			} else {
+				goToSuppliesMain();
+			}
 		}
+	});
+
+	$("btCancel").observe("click", function() {
+		//goToHome();
+		checkIfHasChild();
+	});
+
+
+	$("txtReorderLvl").observe("keypress", function(event) {
+		var charCode = (event.which) ? event.which : event.keyCode;
+
+		if (numberOnly(charCode)) {
+			return true;
+		}
+
+		event.preventDefault();
 	});
 </script>

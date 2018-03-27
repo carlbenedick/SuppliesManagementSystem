@@ -12,4 +12,5 @@ public interface SuppliesMaintenanceService {
 	void insertSupply(HttpServletRequest request) throws SQLException;
 	void updateSupply(HttpServletRequest request) throws SQLException;
 	List<Supply> searchSupply(HttpServletRequest request) throws SQLException;
+	Integer getResultFunctionHasChild(HttpServletRequest request) throws SQLException;
 }

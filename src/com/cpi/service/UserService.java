@@ -26,4 +26,6 @@ public interface UserService {
 	public void updateUser(HttpServletRequest request) throws SQLException;
 	
 	public void updateProfile(HttpServletRequest request) throws SQLException;
+	
+	public List<User> searchUser(HttpServletRequest request) throws SQLException;
 }

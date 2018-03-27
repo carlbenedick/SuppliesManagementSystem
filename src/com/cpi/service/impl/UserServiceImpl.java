@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
 							session.setAttribute(userIDKey, userName);
 							session.setAttribute("accessType", user.getAccessLevel());
 							session.setAttribute("firstName", user.getFirstName());
+							session.setAttribute("lastName", user.getLastName());
 							tryCount = 0;
 							session.setAttribute(tryCountKey, tryCount);
 						} else {
@@ -165,6 +166,11 @@ public class UserServiceImpl implements UserService {
 		params.put("activeTag", request.getParameter("activeTag"));
 		params.put("accessLevel", request.getParameter("accessLevel"));
 		this.getUserDAO().updateProfile(params);
+	}
+	
+	@Override
+	public List<User> searchUser(HttpServletRequest request) throws SQLException {
+		return this.getUserDAO().searchUser(request);
 	}
 	
 }

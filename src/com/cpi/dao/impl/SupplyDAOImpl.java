@@ -1,6 +1,7 @@
 package com.cpi.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,19 +34,20 @@ public class SupplyDAOImpl implements SupplyDAO {
 		return this.getSqlMapClient().queryForList(getType);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void insertSupply(HttpServletRequest request) throws SQLException {
 		this.sqlMapClient.startTransaction();
 		this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
 		this.sqlMapClient.startBatch();
 
-		Supply sup = new Supply(Integer.valueOf(request.getAttribute("supplyTypeID").toString()),
-				request.getAttribute("itemName").toString(), request.getAttribute("itemUnit").toString(),
-				request.getAttribute("obsTag").toString(), request.getAttribute("location").toString(),
-				Integer.valueOf(request.getAttribute("reorderLvl").toString()),
-				Integer.valueOf(request.getAttribute("actCount").toString()),
-				request.getAttribute("remarks").toString(), request.getAttribute("dateAdded").toString(),
-				request.getAttribute("lastUser").toString());
+		List<Supply> addSupply = new ArrayList<Supply>();
+		addSupply = (List<Supply>) request.getAttribute("addSupply");
+		
+		
+		Supply sup = new Supply(addSupply.get(0).getSupplyTypeID(),addSupply.get(0).getItemName(), addSupply.get(0).getItemUnit(),
+				addSupply.get(0).getObsTag(), addSupply.get(0).getLocation(), addSupply.get(0).getReorderLvl(), addSupply.get(0).getActCount(),
+				addSupply.get(0).getRemarks(), addSupply.get(0).getDateAdded(),addSupply.get(0).getLastUser());
 
 		System.out.println(" adding "+ sup.getSupplyTypeID() + " ," + sup.getItemName() + " ," + sup.getLastUser());
 
@@ -55,21 +57,23 @@ public class SupplyDAOImpl implements SupplyDAO {
 		this.sqlMapClient.getCurrentConnection().commit();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updateSupply(HttpServletRequest request) throws SQLException {
 		this.sqlMapClient.startTransaction();
 		this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
 		this.sqlMapClient.startBatch();
 
-		Supply sup = new Supply();
 		
-		sup.setSupplyID(Integer.valueOf(request.getAttribute("supplyID").toString()));
-		sup.setItemName(request.getAttribute("itemName").toString());
-		sup.setItemUnit(request.getAttribute("itemUnit").toString());
-		sup.setObsTag(request.getAttribute("obsTag").toString());
-		sup.setLocation(request.getAttribute("location").toString());
-		sup.setReorderLvl(Integer.valueOf(request.getAttribute("reorderLvl").toString()));
-		sup.setRemarks(request.getAttribute("remarks").toString());
+		
+		List<Supply> updateSupply = new ArrayList<Supply>();
+		updateSupply = (List<Supply>) request.getAttribute("updateSupply");
+		
+		System.out.println("DAO "+updateSupply.get(0).getRemarks());
+		
+		Supply sup = new Supply(updateSupply.get(0).getSupplyID(), updateSupply.get(0).getItemName(), updateSupply.get(0).getItemUnit(),
+				updateSupply.get(0).getObsTag(), updateSupply.get(0).getLocation(), updateSupply.get(0).getReorderLvl(), updateSupply.get(0).getRemarks(), 
+				updateSupply.get(0).getLastUser());
 
 		this.getSqlMapClient().update("updateSupply", sup);
 		
@@ -92,6 +96,17 @@ public class SupplyDAOImpl implements SupplyDAO {
 		
 		String getType = request.getAttribute("getType").toString();
 		return this.getSqlMapClient().queryForList(getType, supply);
+	}
+
+	@Override
+	public Integer getResultFunctionHasChild(HttpServletRequest request) throws SQLException {
+		// TODO Auto-generated method stub
+		Supply supply = new Supply();
+		
+		supply.setSupplyID(Integer.valueOf(request.getAttribute("supplyID").toString()));;
+		
+		String getType = request.getAttribute("getType").toString();
+		return (Integer) this.getSqlMapClient().queryForObject(getType, supply);
 	}
 
 }

@@ -17,27 +17,27 @@
 	</div>
 </body>
 <script>
-	$("btnMaintenance").observe("click", function() {
-		new Ajax.Request(contextPath + "/maintenance", {
-			method : "GET",
-			parameters : {
-				action : "maintain",
-			},
-			onComplete : function(response) {
-				$("mainContents").update(response.responseText);
-			}
-		});
+$("btnMaintenance").observe("click", function() {
+	new Ajax.Request(contextPath + "/maintenance", {
+		method : "GET",
+		parameters : {
+			action : "maintain",
+		},
+		onComplete : function(response) {
+			$("mainContents").update(response.responseText);
+		}
 	});
-	$("btnupdateprof").observe("click", function() {
-		new Ajax.Request(contextPath + "/updateprof", {
-			method : "GET",
-			parameters : {
-				action : "updateprof",
-			},
-			onComplete : function(response) {
-				$("mainContents").update(response.responseText);
-			}
-		});
+});
+$("btnupdateprof").observe("click", function() {
+	new Ajax.Request(contextPath + "/updateprof", {
+		method : "GET",
+		parameters : {
+			action : "updateprof",
+		},
+		onComplete : function(response) {
+			$("mainContents").update(response.responseText);
+		}
 	});
+});
 </script>
 </html>

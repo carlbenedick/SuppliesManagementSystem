@@ -36,7 +36,6 @@
 		supply_types_3 b
 		WHERE a.supply_type_id = b.supply_type_id
 		AND obsolete_tag = 'N'
-		AND reorder_level is not null
 		ORDER BY a.supply_id
 	</select>
 
@@ -62,6 +61,11 @@
 		ORDER BY a.supply_id
 	</select>
 
+	<select id="getSupplyChild" parameterClass="SupplyClass" resultClass="Integer">
+		SELECT hasChildRecord(#supplyID#)
+		FROM dual
+	</select>
+
 	<insert id="insertSupply" parameterClass="SupplyClass">
 		INSERT into
 		supplies_3
@@ -82,8 +86,8 @@
 		 	 obsolete_tag = #obsTag#, 
 		 	 location = #location#,
 		 	 reorder_level = #reorderLvl#,
-		 	 remarks = #remarks#
-		 	 last_user = #lastUser#
+		 	 remarks = #remarks#,
+		 	 last_user = #lastUser#,
 		 	 last_update = sysdate
 		 WHERE supply_id = #supplyID#
 	</insert>

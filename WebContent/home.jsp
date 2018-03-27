@@ -11,25 +11,23 @@
 	var contextPath = "${pageContext.request.contextPath}";
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@ include file="../includes/header.jsp"%>
 <title>Home</title>
 </head>
 <body>
 	<div id="mainContents">
-		<div id="header" style="background-color: #448cff;">
-			<%@ include file="header.jsp"%></div>
-		<h1>HOME</h1>
-		<%
-			if (session.getAttribute("accessType").equals("A")) {
-		%>
-		<a href="JavaScript:goMainte()">Maintenance</a>
-		<%
-			}
-		%>
-		<br> <a href="pages/supplies_maintenance.jsp">Supplies</a> <br>
-		<a href="stocks.jsp">Stocks</a> <br>
-		<a href="issue">Issue Supply</a>
-		<div>
-			<input type="button" id="btnLogout" value="Log out">
+		<div id="body" class="container-fluid panel-body">
+			<h1>HOME</h1>
+			<%
+				if (session.getAttribute("accessType").equals("A")) {
+			%>
+			<a href="JavaScript:goMainte()">Maintenance</a>
+			<%
+				}
+			%>
+			<br> <a href="supplies?action=suppliesMaintenance">Supplies</a>
+			<br> <a href="stocks.jsp">Stocks</a> <br> <a href="issue">Issue
+				Supply</a>
 		</div>
 	</div>
 </body>

@@ -18,6 +18,14 @@ public class User {
 	private Date lastUpdate;
 	private String newPassword;
 
+	public User(String userID, String password, String active, String accessLevel) {
+		// TODO Auto-generated constructor stub
+		this.userId = userID;
+		this.password = password;
+		this.activeTag = active;
+		this.accessLevel = accessLevel;
+	}
+	
 	public User(String userID, String password, String firstName, String lastName, String active, String accessLevel) {
 		// TODO Auto-generated constructor stub
 		this.userId = userID;

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,24 +11,26 @@
 </script>
 </head>
 <body>
-	<table>
-		<tr>
-			<td>Current Password</td>
-			<td><input type="text" id="passwords"></td>
-		</tr>
-		<tr>
-			<td>New Password</td>
-			<td><input type="text" id="newPassword"></td>
-			<td></td>
-			<td><input type="button" id="btnSaves" value="Save"></td>
-		</tr>
-		<tr>
-			<td>Retype Password</td>
-			<td><input type="text" id="retypePasswords"></td>
-			<td></td>
-			<td><input type="button" id="btnCancels" value="Cancel"></td>
-		</tr>
-	</table>
+	<div id="changePasswords">
+		<table>
+			<tr>
+				<td>Current Password</td>
+				<td><input type="text" id="passwords"></td>
+			</tr>
+			<tr>
+				<td>New Password</td>
+				<td><input type="text" id="newPasswords"></td>
+				<td></td>
+				<td><input type="button" id="btnSaves" value="Save"></td>
+			</tr>
+			<tr>
+				<td>Retype Password</td>
+				<td><input type="text" id="retypePasswords"></td>
+				<td></td>
+				<td><input type="button" id="btnCancels" value="Cancel"></td>
+			</tr>
+		</table>
+	</div>
 </body>
 <script>
 	var pass_min = 8;
