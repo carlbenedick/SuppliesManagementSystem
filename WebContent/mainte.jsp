@@ -8,10 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<jsp:include page="includes/header.jsp">
+	<jsp:param value="" name="" />
+</jsp:include>
 <body>
 	<div id="mainContents">
-		<div id="header" style="background-color: #448cff;">
-			<%@ include file="../header.jsp"%></div>
 		<br> <a href="stocks.jsp">Stocks</a> <br>
 		<div>
 			<input type="button" id="btSuppliesMaintenance"
@@ -19,7 +20,7 @@
 		</div>
 		<div>
 			<input type="button" id="btnMaintenance" value="Maintenance">
-		</div>		
+		</div>
 	</div>
 </body>
 </html>

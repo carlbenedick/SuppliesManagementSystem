@@ -5,10 +5,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="JS/jquery.min.js"></script>
+<script src="JS/bootstrap.js"></script>
+<script src="JS/bootstrap.min.js"></script>
+<script src="JS/sweetalert.min.js"></script>
 <script src="JS/prototype.js"></script>
+<script src="JS/functions.js"></script>
 <!-- <link rel="stylesheet" href="css/style.css" type="text/css" /> -->
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+
+<title>Supply Management System</title>
 </head>
 <style>
 body {
@@ -23,7 +29,8 @@ body {
 	background: #fff;
 	border-radius: 5px;
 	border-top: 5px solid #4286f4;
-	margin: 0 auto;   	
+	margin: 0 auto;
+	margin-top: 150px;
 }
 
 .login-block h1 {
@@ -104,7 +111,6 @@ body {
 				placeholder="Username" /> <input type="password" id="password"
 				placeholder="Password" />
 			<button class="button" value="Log in" id="btnLogin">Log in</button>
-
 		</div>
 	</div>
 </body>
@@ -124,7 +130,19 @@ body {
 				password : $F("password")
 			},
 			onComplete : function(response) {
-				$("mainContents").update(response.responseText);
+				var resp = response.responseText;
+				var jsonResponse = eval("(" + resp + ")");
+				if (jsonResponse.loginStatus !== 1) {
+					swal({
+						title : 'Login Failed',
+						icon : 'error',
+						text : jsonResponse.loginMessage
+					}).then(function() {
+						window.location.replace('home');
+					});
+				}else {
+					window.location.replace('home');
+				}
 			}
 		});
 	}

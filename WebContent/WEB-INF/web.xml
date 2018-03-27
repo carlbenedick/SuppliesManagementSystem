@@ -13,6 +13,15 @@
 		<servlet-name>homeServlet</servlet-name>
 		<url-pattern>/index</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>home2Servlet</servlet-name>
+		<servlet-class>com.cpi.servlet.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>home2Servlet</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>suppliesMaintenance</servlet-name>
@@ -37,6 +46,11 @@
 	<servlet-mapping>
 		<servlet-name>userServlets</servlet-name>
 		<url-pattern>/updateProfile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>userServlets</servlet-name>
+		<url-pattern>/updateprof</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

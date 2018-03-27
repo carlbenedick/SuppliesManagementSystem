@@ -17,7 +17,6 @@
 </head>
 <body>
 	<div id="mainContents">
-		<%=session.getAttribute("userId")%>
 		<%
 			if (session.getAttribute("userId") == null) {
 		%>

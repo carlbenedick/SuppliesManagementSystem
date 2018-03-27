@@ -25,7 +25,7 @@ function logOut() {
 
 		},
 		onComplete : function(response) {
-			$("mainContents").update(response.responseText);
+			window.location.replace('home');
 		}
 	});
 }
@@ -51,6 +51,30 @@ function goIssue() {
 		parameters : {
 			action : "goIssue"
 
+		},
+		onComplete : function(response) {
+			$("mainContents").update(response.responseText);
+		}
+	});
+}
+
+ function userMaintenance() {
+	new Ajax.Request(contextPath + "/maintenance", {
+		method : "GET",
+		parameters : {
+			action : "maintain",
+		},
+		onComplete : function(response) {
+			$("mainContents").update(response.responseText);
+		}
+	});
+}
+
+function updateProf() {
+	new Ajax.Request(contextPath + "/updateProfile", {
+		method : "GET",
+		parameters : {
+			action : "updateprof",
 		},
 		onComplete : function(response) {
 			$("mainContents").update(response.responseText);

@@ -44,7 +44,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		User user = new User();
 		   
-		user.setUserId((String)session.getAttribute("userId"));
+		user.setUserId(request.getParameter("userName"));
 		user.setActiveTag("N");
 		user.setLastUpdate(new Date());	
 
@@ -141,6 +141,19 @@ public class UserDAOImpl implements UserDAO {
 		} finally {
 			this.sqlMapClient.endTransaction();
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> searchUser(HttpServletRequest request) throws SQLException {
+		Map<String, Object> params = new HashMap<>();
+		String search = "%" + request.getParameter("searchId") + "%";
+		params.put("userId", search);
+		//User user = new User();
+		
+		
+		//user.setFirstName(search);
+		return (List<User>) this.getSqlMapClient().queryForList("searchUser", params);
 	}
 
 }

@@ -25,6 +25,16 @@ public class User {
 		this.activeTag = active;
 		this.accessLevel = accessLevel;
 	}
+	
+	public User(String userID, String password, String firstName, String lastName, String active, String accessLevel) {
+		// TODO Auto-generated constructor stub
+		this.userId = userID;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.activeTag = active;
+		this.accessLevel = accessLevel;
+	}
 
 	public User() {
 		// TODO Auto-generated constructor stub

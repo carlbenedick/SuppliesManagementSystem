@@ -207,14 +207,15 @@
 
 	
 	
-	$("search").observe("change", function(){
+	$("search").observe("keyup", function(){
 		new Ajax.Request(contextPath + "/search", {
-			method: "get",
+			method: "POST",
 			parameters: {
-				action: "test",
-				searchId: $("search").value
+				/* action: "search", */
+				searchId: $F("search")
 			},
 			onComplete: function(response) {
+				
 			}
 		});
 	});

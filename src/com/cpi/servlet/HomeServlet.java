@@ -18,7 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.cpi.entity.User;
 import com.cpi.service.UserService;
 
-public class Servlet extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -27,8 +27,7 @@ public class Servlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		int loginStatus = 1;
-		String loginMessage = null;
+
 		try {
 			@SuppressWarnings("resource")
 			ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
@@ -53,32 +52,11 @@ public class Servlet extends HttpServlet {
 
 			session.setAttribute("sessionList", userList);
 
-			String page = "";
-			String action = request.getParameter("action");
-
-			if (action.equals("login")) {
-				if (userService.login(request)) {					
-					userService.loginUser(request);
-					page = "index.jsp";
-				} else {
-					System.out.println((Integer) session.getAttribute("tryCount"));
-					if ((Integer) session.getAttribute("tryCount") >= 3) {
-						userService.deactivateUser(request);
-						session.invalidate();
-					}
-					loginStatus = 0;
-					page = "index.jsp";
-				}
-			} else if (action.equals("goHome")) {
-				page = "index.jsp";
-			}
+			String page = "index.jsp";
 			
-			loginMessage = (String) request.getAttribute("message");
 			
-			response.getWriter().write("{'loginStatus': "+ loginStatus +", 'loginMessage': '" + loginMessage +"'}");
-			
-//			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-//			dispatcher.forward(request, response);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -86,25 +64,6 @@ public class Servlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		String page = "";
-		String action = request.getParameter("action");
-		HttpSession session = request.getSession();
-		System.out.println(action);
-		if (action.equals("backToLogin")) {
-			page = "index.jsp";
-		} else if (action.equals("logOut")) {
-			session.invalidate();
-			page = "index.jsp";
-		} else if (action.equals("goHome")) {
-			page = "home.jsp";
-		} else if (action.equals("goMainte")) {
-			page = "mainte.jsp";
-		} else if (action.equals("goIssue")) {
-			page = "issue";
-			System.out.println(page);
-		}
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		dispatcher.forward(request, response);
+		doPost(request, response);
 	}
 }

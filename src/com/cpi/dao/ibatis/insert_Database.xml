@@ -27,7 +27,7 @@
 		access_level, entry, last_login, last_user, last_update FROM
 		sms_users_3
 	</select>
-	
+
 	<procedure id="insertUser" parameterClass="java.util.Map">
 		INSERT INTO
 		sms_users_3 (user_id, password, first_name, last_name,
