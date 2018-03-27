@@ -46,7 +46,8 @@ public class Servlet extends HttpServlet {
 			l = userService.getUser();
 
 			for (User u : l) {
-				userList.add(new User(u.getUserId(), u.getPassword(), u.getActiveTag(), u.getAccessLevel()));
+				userList.add(new User(u.getUserId(), u.getPassword(), u.getFirstName(), u.getLastName(),
+						u.getActiveTag(), u.getAccessLevel()));
 			}
 
 			session.setAttribute("sessionList", userList);
@@ -56,7 +57,6 @@ public class Servlet extends HttpServlet {
 
 			if (action.equals("login")) {
 				if (userService.login(request)) {
-					System.out.println("test");
 					userService.loginUser(request);
 					page = "index.jsp";
 					session.setAttribute("curPage", page);
@@ -97,7 +97,6 @@ public class Servlet extends HttpServlet {
 			page = "mainte.jsp";
 		} else if (action.equals("goIssue")) {
 			page = "issue";
-			System.out.println(page);
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
